@@ -1,0 +1,4 @@
+<!doctype html><script src=common.js></script><body style="margin:0"><video id=v src=short.wav width="480" height="270" style="display:block;background:#000"></video><script>
+R.log=[]; v.addEventListener('click', ()=>tryPlay(v,'first'));
+v.addEventListener('ended', ()=>{ R.log.push('ended'); if (!R.ended1) { R.ended1=1; setTimeout(()=>tryPlay(v,'quick'), 300); } else if (!R.ended2) { R.ended2=1; setTimeout(()=>tryPlay(v,'late'), 3000); } });
+window.check=()=>({v:st(v), first:R.first, quick:R.quick, late:R.late, log:R.log})</script></body>

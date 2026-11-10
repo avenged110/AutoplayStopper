@@ -1,0 +1,5 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<p id=txt style="position:absolute;left:700px;top:600px;width:300px">Some article text the user clicks on.</p>
+<video id=v src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video>
+<script>tryPlay(v,'initial'); document.addEventListener('click', ()=>tryPlay(v,'unlock'), {once:true});
+window.check=()=>({v:st(v), unlock:R.unlock})</script></body>

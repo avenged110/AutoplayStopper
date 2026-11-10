@@ -1,0 +1,5 @@
+<!doctype html><script src=common.js></script><script src=xo-common.js></script><body style="margin:0">
+<iframe id=f src="http://site-b.test:8766/child-msg.html" style="position:absolute;left:0;top:0;width:480px;height:270px;border:0"></iframe>
+<div id=ov style="position:absolute;left:0;top:0;width:480px;height:270px;background:rgba(0,0,0,.4)"></div>
+<script>ov.addEventListener('click', ()=>{ ov.remove(); f.contentWindow.postMessage('play','*'); });
+window.check=()=>{ askChild(f); return new Promise(r=>setTimeout(()=>r({child:childState}),300)); }</script></body>

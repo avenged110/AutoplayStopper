@@ -1,0 +1,10 @@
+<!doctype html><script src=common.js></script><body>
+<video id=v src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><script>
+const f = document.createElement('iframe'); document.body.appendChild(f);
+const pw = frames[frames.length-1];
+try { pw.HTMLMediaElement.prototype.play.call(v).then(()=>R.p='resolved',e=>R.p=e.name) } catch(e) { R.p='threw' }
+const a = new pw.Audio('tone.wav'); try { a.play().then(()=>R.pa='resolved',e=>R.pa=e.name) } catch(e) { R.pa='threw' }
+const f2 = document.createElement('iframe'); document.body.append(f2);
+const v2 = document.createElement('video'); v2.src='tone.wav'; v2.muted=true; frames[frames.length-1].HTMLMediaElement.prototype.setAttribute ? 0:0;
+frames[frames.length-1].Element.prototype.setAttribute.call(v2,'autoplay',''); document.body.append(v2);
+window.check=()=>({v:st(v), p:R.p, a:st(a), pa:R.pa, v2:st(v2)})</script></body>

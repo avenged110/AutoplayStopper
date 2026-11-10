@@ -1,0 +1,9 @@
+<!doctype html><script src=common.js></script><body><script>
+// Player that retries immediately on rejection and on resolve-but-still-paused (stall watchdog).
+window.N = {calls: 0, play: 0};
+const v = document.createElement('video'); v.src = 'tone.wav'; v.muted = true; v.loop = true; document.body.appendChild(v);
+v.addEventListener('play', () => N.play++);
+function go() { N.calls++; v.play().then(() => { if (v.paused) setTimeout(go, 0); }, () => setTimeout(go, 0)); }
+go();
+window.check = () => N;
+</script></body>

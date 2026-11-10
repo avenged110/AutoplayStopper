@@ -1,0 +1,10 @@
+<!doctype html><script src=common.js></script><body><script>
+// Player that answers every pause by asking to play again (common "keep the ad running" logic).
+window.N = {play: 0, pause: 0, calls: 0};
+for (let i = 0; i < 4; i++) {
+  const v = document.createElement('video'); v.src = 'tone.wav'; v.muted = true; v.loop = true; document.body.appendChild(v);
+  v.addEventListener('play', () => N.play++); v.addEventListener('pause', () => { N.pause++; N.calls++; v.play().catch(() => {}); });
+  N.calls++; v.play().catch(() => {});
+}
+window.check = () => N;
+</script></body>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Autoplay Stopper</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div id="viewport">
+      <div id="track">
+        <!-- ============================== Main view ============================== -->
+        <section id="main-pane" class="pane" aria-label="Autoplay Stopper">
+          <header class="brand">
+            <h1>Autoplay Stopper</h1>
+          </header>
+
+          <div class="site-card" id="site-card">
+            <div class="favicon-wrap">
+              <img id="favicon" alt="" width="20" height="20" hidden />
+              <svg id="favicon-fallback" viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6" />
+                <path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6" />
+              </svg>
+            </div>
+            <div class="site-text">
+              <div class="site-name" id="site-name">&nbsp;</div>
+              <div class="site-status" id="site-status"><span id="status-text">&nbsp;</span></div>
+            </div>
+          </div>
+          <div class="blocked-line" id="blocked-line">&nbsp;</div>
+
+          <div class="actions">
+            <button type="button" class="action" id="btn-temp" disabled>
+              <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <g class="icon-pause"><rect x="7" y="5.5" width="3.4" height="13" rx="1.2" /><rect x="13.6" y="5.5" width="3.4" height="13" rx="1.2" /></g>
+                <path class="icon-resume" d="M8 5.8v12.4c0 .8.9 1.3 1.6.9l9.8-6.2c.6-.4.6-1.4 0-1.8L9.6 4.9C8.9 4.5 8 5 8 5.8z" />
+              </svg>
+              <span class="action-text">
+                <span class="action-label" id="btn-temp-label">Disable temporarily on this site</span>
+                <span class="action-sub" id="btn-temp-sub">Until you restart the browser</span>
+              </span>
+            </button>
+
+            <button type="button" class="action" id="btn-whitelist" disabled>
+              <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path class="icon-add" d="M12 4.5v15M4.5 12h15" fill="none" stroke-width="2.4" stroke-linecap="round" />
+                <path class="icon-remove" d="M4.5 12h15" fill="none" stroke-width="2.4" stroke-linecap="round" />
+              </svg>
+              <span class="action-text">
+                <span class="action-label" id="btn-whitelist-label">Add this site to whitelist</span>
+                <span class="action-sub" id="btn-whitelist-sub">Always allow autoplay here</span>
+              </span>
+            </button>
+
+            <div class="action-row">
+            <button type="button" class="action compact" id="btn-import">
+              <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 4v10.5M7.5 10l4.5 4.5 4.5-4.5M5 19.5h14" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <span class="action-text">
+                <span class="action-label">Import</span>
+                <span class="action-sub">From a file</span>
+              </span>
+            </button>
+            <button type="button" class="action" id="btn-edit">
+              <svg class="action-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 6.5h11M9 12h11M9 17.5h11" fill="none" stroke-width="2.2" stroke-linecap="round" />
+                <circle cx="4.6" cy="6.5" r="1.5" /><circle cx="4.6" cy="12" r="1.5" /><circle cx="4.6" cy="17.5" r="1.5" />
+              </svg>
+              <span class="action-text">
+                <span class="action-label">Edit whitelist</span>
+                <span class="action-sub" id="btn-edit-sub">&nbsp;</span>
+              </span>
+              <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5.5l6.5 6.5L9 18.5" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================== Whitelist view ============================== -->
+        <section id="list-pane" class="pane" aria-label="Whitelist" inert>
+          <header class="pane-header">
+            <h2>Whitelist</h2>
+            <span class="pane-count" id="list-count"></span>
+          </header>
+
+          <div class="list-wrap" id="list-wrap">
+            <ul id="list" class="list" aria-label="Whitelisted sites"></ul>
+            <div id="empty" class="empty" hidden>
+              <p class="empty-title">No sites yet</p>
+              <p class="empty-sub">Sites you add here are allowed to autoplay.</p>
+            </div>
+            <div class="hint" id="hint" aria-live="polite"></div>
+          </div>
+
+          <form class="entry" id="entry-form" autocomplete="off" novalidate>
+            <input id="url-input" type="text" inputmode="url" placeholder="https://example.com" spellcheck="false" autocapitalize="off" aria-label="Site address" aria-describedby="hint" />
+            <div class="entry-buttons">
+              <button type="button" class="btn" id="btn-back"><svg class="btn-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3.5L5.5 8l4.5 4.5" /></svg>Back</button>
+              <button type="button" class="btn" id="btn-export"><svg class="btn-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 10V2.5M5 5.5l3-3 3 3M3 9.5v3a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-3" /></svg>Export</button>
+              <button type="submit" class="btn primary" id="btn-add" disabled><svg class="btn-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" /></svg>Add</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+    <script src="../shared/sites.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

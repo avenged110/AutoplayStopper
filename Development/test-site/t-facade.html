@@ -1,0 +1,4 @@
+<!doctype html><script src=common.js></script><script src=xo-common.js></script><body style="margin:0">
+<div id=facade style="position:absolute;left:0;top:0;width:480px;height:270px;background:#333;color:#fff">PLAY</div>
+<script>let f=null; facade.addEventListener('click', ()=>{ f=document.createElement('iframe'); f.src='http://site-b.test:8766/child-play.html'; f.style.cssText='position:absolute;left:0;top:0;width:480px;height:270px;border:0'; facade.replaceWith(f); });
+window.check=()=>{ if(!f) return {child:'no iframe'}; askChild(f); return new Promise(r=>setTimeout(()=>r({child:childState}),300)); }</script></body>

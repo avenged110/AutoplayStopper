@@ -1,0 +1,8 @@
+<!doctype html><script src=common.js></script><body><div id=box></div><script>
+// Live-feed style churn: every frame, replace a 300-element block (cards with nested markup).
+window.N = {frames: 0};
+const card = i => `<div class=card><header><h3>Item ${i}</h3><span>meta</span></header><p>text <a href=#>link</a> <b>b</b></p><ul><li>a</li><li>b</li></ul><section><img alt=""><span>x</span></section></div>`;
+let i = 0;
+(function tick() { N.frames++; const html = Array.from({length: 25}, () => card(i++)).join(''); box.innerHTML = html; requestAnimationFrame(tick); })();
+window.check = () => N;
+</script></body>

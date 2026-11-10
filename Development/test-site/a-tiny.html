@@ -1,0 +1,11 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<article id=art style="position:absolute;left:0;top:0;width:900px;height:800px;padding:20px">
+  <p id=para style="margin-top:300px">Long article text the reader clicks to select.</p>
+  <video id=hid src=tone.wav muted style="width:1px;height:1px;display:block"></video>
+</article>
+<div class=aplayer style="position:absolute;left:950px;top:20px;width:300px;height:60px;background:#ddd">
+  <audio id=au src=tone.wav></audio><button id=ab style="width:60px;height:40px">▶</button></div>
+<script>
+para.addEventListener('click', ()=>setTimeout(()=>tryPlay(hid,'hidden'), 800));
+ab.addEventListener('click', ()=>setTimeout(()=>tryPlay(au,'audioPlayer'), 500));
+window.check=()=>({hid:st(hid), hidden:R.hidden, au:st(au), audioPlayer:R.audioPlayer})</script></body>

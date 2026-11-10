@@ -1,0 +1,3 @@
+<!doctype html><script src=common.js></script><body><canvas id=c width=64 height=64></canvas><video id=v autoplay muted width="480" height="270" style="display:block;background:#000"></video><script>
+const ctx=c.getContext('2d'); setInterval(()=>{ctx.fillStyle='#'+Math.floor(Math.random()*4096).toString(16).padStart(3,'0'); ctx.fillRect(0,0,64,64)},50);
+v.srcObject = c.captureStream(20); window.check=()=>({v:{paused:v.paused}})</script></body>

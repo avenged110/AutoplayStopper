@@ -1,0 +1,7 @@
+<!doctype html><script src=common.js></script><body>
+<script>
+const f = document.createElement('iframe'); f.src = 'child-autoplay.html'; f.style.cssText='width:480px;height:270px';
+document.body.appendChild(f);
+const early = f.contentWindow; // touch the initial about:blank window before navigation commits
+window.check = () => { const v = f.contentDocument && f.contentDocument.getElementById('v'); return {v: st(v), reused: f.contentWindow === early}; };
+</script></body>

@@ -1,0 +1,3 @@
+<!doctype html><script src=common.js></script><script src=xo-common.js></script><body style="margin:0">
+<iframe id=f src="http://site-b.test:8766/child-autoplay.html" style="width:480px;height:270px;border:0"></iframe>
+<script>window.check=()=>{ askChild(f); return new Promise(r=>setTimeout(()=>r({child:childState}),300)); }</script></body>

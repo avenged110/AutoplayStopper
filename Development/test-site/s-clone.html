@@ -1,0 +1,9 @@
+<!doctype html><script src=common.js></script><body><div id=box></div><script>
+// Framework-style rendering: clone a template (15 elements) 20,000 times, as lit/Solid do per row.
+const t = document.createElement('template');
+t.innerHTML = '<div class=row><span class=a>x</span><span class=b>y</span><div><a href=#>l</a><b>b</b><i>i</i></div><ul><li>1</li><li>2</li><li>3</li></ul><p><em>e</em><strong>s</strong></p></div>';
+function run() { const t0 = performance.now(); for (let i = 0; i < 20000; i++) { const c = t.content.cloneNode(true); if (i % 1000 === 0) box.replaceChildren(c); } const t1 = performance.now();
+  for (let i = 0; i < 20000; i++) document.importNode(t.content, true); return [t1 - t0, performance.now() - t1]; }
+run(); const r = [run(), run(), run()];
+window.check = () => ({clone: r.map(x => +x[0].toFixed(1)), import: r.map(x => +x[1].toFixed(1))});
+</script></body>

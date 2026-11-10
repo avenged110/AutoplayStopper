@@ -1,0 +1,3 @@
+<!doctype html><script src=common.js></script><body style="margin:0"><video id=v src=tone.wav width="480" height="270" style="display:block;background:#000"></video><script>
+v.addEventListener('click', ()=>{ tryPlay(v,'first'); setTimeout(()=>{ v.pause(); setTimeout(()=>tryPlay(v,'second'), 6000); }, 1000); });
+window.check=()=>({v:st(v), first:R.first, second:R.second})</script></body>

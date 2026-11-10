@@ -1,0 +1,5 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<div style="height:3000px">top</div><video id=v src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><div style="height:3000px"></div>
+<script>new IntersectionObserver(es=>{ for (const e of es) if (e.isIntersecting) tryPlay(v,'io'); }).observe(v);
+addEventListener('scroll', ()=>{ const r=v.getBoundingClientRect(); if (r.top<innerHeight && r.bottom>0) tryPlay(v,'scrollev'); });
+window.check=()=>({v:st(v), io:R.io, scrollev:R.scrollev, y:scrollY})</script></body>

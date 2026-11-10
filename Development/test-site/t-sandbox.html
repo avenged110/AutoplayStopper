@@ -1,0 +1,11 @@
+<!doctype html><script src=common.js></script><body>
+<!-- Script-less sandboxed / opaque-origin frames: the page itself can't run code, but markup autoplay still runs. -->
+<iframe id=s sandbox srcdoc="<audio src='http://site-a.test:8765/tone.wav' autoplay loop controls></audio>"></iframe>
+<iframe id=sa sandbox="allow-same-origin" srcdoc="<audio src='http://site-a.test:8765/tone.wav' autoplay loop controls></audio>"></iframe>
+<iframe id=d src="data:text/html,<audio src='http://site-a.test:8765/tone.wav' autoplay loop controls></audio>"></iframe>
+<script>
+const b = URL.createObjectURL(new Blob(["<audio src='http://site-a.test:8765/tone.wav' autoplay loop controls></audio>"], {type: 'text/html'}));
+const bf = document.createElement('iframe'); bf.id = 'b'; bf.src = b; document.body.appendChild(bf);
+window.check = () => ({sameOriginSandbox: (() => { try { return st(document.getElementById('sa').contentDocument.querySelector('audio')); } catch (e) { return 'err'; } })(),
+  blob: (() => { try { return st(bf.contentDocument.querySelector('audio')); } catch (e) { return 'err'; } })()});
+</script></body>

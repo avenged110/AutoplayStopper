@@ -1,0 +1,5 @@
+<!doctype html><script src=common.js></script><div id=h1></div><div id=h2></div><script>
+const r1 = h1.attachShadow({mode:'closed'}); r1.innerHTML='<video src=tone.wav autoplay muted width="480" height="270" style="display:block;background:#000"></video>';
+const r2 = h2.attachShadow({mode:'closed'}); const v2=document.createElement('video'); v2.src='tone.wav'; r2.appendChild(v2);
+setTimeout(()=>tryPlay(v2,'p'),500);
+window.check=()=>({v1:st(r1.querySelector('video')), v2:st(v2), p:R.p})</script>

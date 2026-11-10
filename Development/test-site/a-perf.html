@@ -1,0 +1,13 @@
+<!doctype html><body><div id=root></div><script>
+window.done = new Promise(res => {
+  const t0 = performance.now(); let batches = 0;
+  (function batch() {
+    const frag = document.createElement('div');
+    for (let i = 0; i < 50; i++) { const d = document.createElement('div'); d.className = 'card'; d.appendChild(document.createElement('span')).textContent = 'x' + i; frag.appendChild(d); }
+    frag.insertAdjacentHTML('beforeend', '<p>a</p>'.repeat(49) + '<video muted></video>');
+    root.appendChild(frag);
+    if (++batches < 200) setTimeout(batch, 0); else setTimeout(() => res(performance.now() - t0), 200);
+  })();
+});
+window.check = async () => ({ ms: Math.round(await window.done), videos: document.querySelectorAll('video').length });
+</script></body>

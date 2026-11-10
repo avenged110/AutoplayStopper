@@ -1,0 +1,6 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<button id=more style="position:absolute;left:20px;top:20px;width:160px;height:40px">Load more</button>
+<div id=feed style="position:absolute;left:600px;top:300px;display:none"><video id=v src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video></div>
+<script>more.addEventListener('click', ()=>{ feed.style.display='block'; });
+new IntersectionObserver(es=>{ for (const e of es) if (e.isIntersecting) tryPlay(v,'io'); }).observe(v);
+window.check=()=>({v:st(v), io:R.io})</script></body>

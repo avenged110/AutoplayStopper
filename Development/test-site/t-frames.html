@@ -1,0 +1,10 @@
+<!doctype html><script src=common.js></script><body><script>
+// Pristine play() reached through window.frames[] / window[n] instead of iframe.contentWindow.
+const f = document.createElement('iframe'); document.body.appendChild(f);
+const w = window[window.length - 1];
+const a = new Audio('tone.wav'); a.loop = true;
+try { const p = w.HTMLMediaElement.prototype.play.call(a); R.p = 'pending'; p.then(()=>R.p='resolved', e=>R.p=e.name); } catch(e) { R.p = 'threw:' + e.name; }
+const a2 = new Audio('tone.wav'); a2.loop = true;
+try { w.Object.getOwnPropertyDescriptor(w.HTMLMediaElement.prototype, 'autoplay').set.call(a2, true); } catch (e) { R.p2 = 'threw:' + e.name; }
+window.check = () => ({a: st(a), p: R.p, a2: st(a2), p2: R.p2});
+</script></body>

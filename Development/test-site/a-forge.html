@@ -1,0 +1,6 @@
+<!doctype html><script src=common.js></script><script src=xo-common.js></script><body style="margin:0">
+<iframe id=f src="http://site-b.test:8766/child-msg.html" style="position:absolute;left:0;top:0;width:480px;height:270px;border:0"></iframe>
+<script>f.addEventListener('load', ()=>{ setTimeout(()=>{
+  for (const t of [Date.now(), Date.now()-100]) f.contentWindow.postMessage({__autoplayStopper:'input', x:200, y:120, time:t}, '*');
+  f.contentWindow.postMessage('play','*'); }, 300); });
+window.check=()=>{ askChild(f); return new Promise(r=>setTimeout(()=>r({child:childState}),300)); }</script></body>

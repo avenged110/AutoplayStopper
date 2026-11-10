@@ -1,0 +1,25 @@
+<!doctype html><script src=common.js></script><body><script>
+const M = '<audio src=tone.wav autoplay loop></audio>';
+const K = {};
+// 1 cloneNode of a detached innerHTML subtree (attribute survived because the original never loaded)
+{ const d = document.createElement('div'); d.innerHTML = M; K.cloneInner = d.cloneNode(true).firstChild; }
+// 2 DOMParser element appended into a detached main-document node (implicit adoption)
+{ const doc = new DOMParser().parseFromString(M, 'text/html'); const d = document.createElement('div'); d.appendChild(doc.body.firstChild); K.implicitAdopt = d.firstChild; }
+// 3 explicit adoptNode
+{ const doc = new DOMParser().parseFromString(M, 'text/html'); K.adopt = document.adoptNode(doc.body.firstChild); }
+// 4 importNode of a DOMParser element
+{ const doc = new DOMParser().parseFromString(M, 'text/html'); K.importEl = document.importNode(doc.body.firstChild, true); }
+// 5 template.content cloneNode then adopted by append into detached div
+{ const t = document.createElement('template'); t.innerHTML = M; const d = document.createElement('div'); d.append(t.content.cloneNode(true)); K.tmplAppend = d.firstChild; }
+// 6 outerHTML-ish: detached span replaced
+{ const d = document.createElement('div'); const s = document.createElement('span'); d.append(s); s.outerHTML = M; K.outer = d.firstChild; }
+// 7 Document.parseHTMLUnsafe + adoption
+if (Document.parseHTMLUnsafe) { const doc = Document.parseHTMLUnsafe(M); const d = document.createElement('div'); d.append(doc.body.firstChild); K.parseUnsafe = d.firstChild; }
+// 8 detached innerHTML then src set again later
+{ const d = document.createElement('div'); d.innerHTML = '<audio autoplay loop></audio>'; d.firstChild.src = 'tone.wav'; K.innerThenSrc = d.firstChild; }
+// 9 XML/XHTML parsed audio (namespace) adopted
+{ const doc = new DOMParser().parseFromString('<div xmlns="http://www.w3.org/1999/xhtml"><audio src="tone.wav" autoplay="" loop=""/></div>', 'application/xhtml+xml'); const d = document.createElement('div'); d.append(doc.documentElement.firstChild); K.xhtml = d.firstChild; }
+// 10 innerHTML on detached div, then load()
+{ const d = document.createElement('div'); d.innerHTML = M; d.firstChild.load(); K.innerLoad = d.firstChild; }
+window.check = () => Object.fromEntries(Object.entries(K).map(([k, v]) => [k, st(v)]));
+</script></body>

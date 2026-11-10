@@ -1,0 +1,12 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<video id=v src=tone.wav width="480" height="270" style="display:block;background:#000"></video>
+<button id=b style="position:absolute;left:600px;top:50px;width:120px;height:40px">Play</button>
+<div id=elsewhere style="position:absolute;left:600px;top:400px;width:120px;height:60px;background:#ccc">elsewhere</div>
+<video id=v2 src=tone.wav style="position:absolute;left:0;top:350px;width:480px;height:270px"></video>
+<script>
+v.addEventListener('click', ()=>tryPlay(v,'clickPlay'));
+b.addEventListener('click', ()=>tryPlay(v,'buttonPlay'));
+v2.addEventListener('click', ()=>setTimeout(()=>tryPlay(v2,'latePlay'), 2000));
+elsewhere.addEventListener('click', ()=>setTimeout(()=>tryPlay(v2,'elsewherePlay'), 1000));
+window.check=()=>({v:st(v), v2:st(v2), clickPlay:R.clickPlay, buttonPlay:R.buttonPlay, latePlay:R.latePlay, elsewherePlay:R.elsewherePlay})
+</script></body>

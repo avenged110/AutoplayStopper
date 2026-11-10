@@ -1,0 +1,9 @@
+<!doctype html><script src=common.js></script><body>
+<!-- A media file loaded as a document: Chrome builds its own autoplaying player inside the frame. -->
+<iframe id=f src="tone.wav?f" width=300 height=60></iframe>
+<object id=o data="tone.wav?o" type="audio/wav" width=300 height=60></object>
+<embed id=e src="tone.wav?e" type="audio/wav" width=300 height=60>
+<script>
+function inner(el) { try { const d = el.contentDocument || (el.getSVGDocument && el.getSVGDocument()); const m = d && d.querySelector('video,audio'); return m ? st(m) : 'none'; } catch (e) { return 'err:' + e.name; } }
+window.check = () => ({iframe: inner(document.getElementById('f')), object: inner(document.getElementById('o')), embed: inner(document.getElementById('e'))});
+</script></body>

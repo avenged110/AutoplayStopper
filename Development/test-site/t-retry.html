@@ -1,0 +1,4 @@
+<!doctype html><script src=common.js></script><body><video id=v src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><script>
+R.events=[]; ['play','playing','pause'].forEach(t=>v.addEventListener(t,e=>R.events.push(t+(e.isTrusted?'':'*'))));
+R.results=[]; let n=0; const iv=setInterval(()=>{ v.play().then(()=>R.results.push('ok'),e=>R.results.push(e.name)); if(++n>=6) clearInterval(iv); }, 200);
+window.check=()=>({v:st(v), results:R.results, events:R.events})</script></body>

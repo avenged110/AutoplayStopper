@@ -1,0 +1,11 @@
+<!doctype html><script src=common.js></script><body><script>
+const f = document.createElement('iframe'); document.body.appendChild(f);
+const pristine = f.contentWindow.HTMLMediaElement.prototype.play;
+const v = document.createElement('video'); v.src='tone.wav'; document.body.appendChild(v);
+try { const p = pristine.call(v); R.p='pending'; p.then(()=>R.p='resolved', e=>R.p=e.name);} catch(e){R.p='threw'}
+const d = f.contentDocument; d.open(); d.write('<video id=iv src="'+location.origin+'/tone.wav" autoplay muted></video>'); d.close();
+const f2 = document.createElement('iframe'); document.body.appendChild(f2);
+const v3 = f2.contentDocument.createElement('video'); v3.src='tone.wav'; f2.contentDocument.body.appendChild(v3);
+setTimeout(()=>{ try{ const p=v3.play(); R.p3='pending'; p.then(()=>R.p3='resolved',e=>R.p3=e.name)}catch(e){R.p3='threw'} }, 300);
+window.check=()=>({v:st(v), p:R.p, iv:st(f.contentDocument.getElementById('iv')), v3:st(v3), p3:R.p3, ts: String(pristine).slice(0,40)})
+</script></body>

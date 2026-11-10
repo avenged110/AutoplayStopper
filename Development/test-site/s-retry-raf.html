@@ -1,0 +1,8 @@
+<!doctype html><script src=common.js></script><body><script>
+// Player that calls play() every frame while paused.
+window.N = {calls: 0, play: 0};
+const v = document.createElement('video'); v.src = 'tone.wav'; v.muted = true; v.loop = true; document.body.appendChild(v);
+v.addEventListener('play', () => N.play++);
+(function tick() { if (v.paused) { N.calls++; v.play().catch(() => {}); } requestAnimationFrame(tick); })();
+window.check = () => N;
+</script></body>

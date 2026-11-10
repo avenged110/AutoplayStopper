@@ -1,0 +1,6 @@
+<!doctype html><script src=common.js></script><body><div id=box></div><script>
+// Chat/ticker style: append small nodes one at a time (many separate insertions), trimming old ones.
+window.N = {frames: 0};
+(function tick() { N.frames++; for (let k = 0; k < 20; k++) { const d = document.createElement('div'); d.className = 'msg'; d.innerHTML = '<span>user</span><p>hello <b>there</b></p>'; box.append(d); } while (box.childElementCount > 400) box.firstElementChild.remove(); requestAnimationFrame(tick); })();
+window.check = () => N;
+</script></body>

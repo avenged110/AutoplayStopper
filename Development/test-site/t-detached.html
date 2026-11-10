@@ -1,0 +1,11 @@
+<!doctype html><script src=common.js></script><body><script>
+// Media created by the parser outside any document tree: never inserted, so no MutationObserver sees them.
+const d = document.createElement('div'); d.innerHTML = '<audio src=tone.wav autoplay loop></audio>';
+const fr = document.createRange().createContextualFragment('<audio src=tone.wav autoplay loop></audio>');
+const t = document.createElement('template'); t.innerHTML = '<audio src=tone.wav autoplay loop></audio>';
+const c = document.importNode(t.content, true);
+const h = document.createElement('div'); if (h.setHTMLUnsafe) h.setHTMLUnsafe('<audio src=tone.wav autoplay loop></audio>');
+const o = document.createElement('div'); o.insertAdjacentHTML('beforeend', '<audio src=tone.wav autoplay loop></audio>');
+const cl = (() => { const a = document.createElement('audio'); a.src = 'tone.wav'; a.loop = true; const x = a.cloneNode(); return x; })();
+window.check = () => ({inner: st(d.firstChild), frag: st(fr.firstChild), tmpl: st(c.firstChild), html: st(h.firstChild), adj: st(o.firstChild)});
+</script></body>

@@ -1,0 +1,8 @@
+<!doctype html><script src=common.js></script><body><script>
+const v = document.createElement('video'); v.autoplay = true; v.muted = true; v.src='tone.wav'; document.body.appendChild(v);
+const v2 = document.createElement('video'); v2.setAttribute('autoplay',''); v2.muted=true; v2.src='tone.wav'; document.body.appendChild(v2);
+const v3 = document.createElement('video'); v3.muted=true; v3.src='tone.wav'; document.body.appendChild(v3); const at=document.createAttribute('autoplay'); v3.setAttributeNode(at);
+const div = document.createElement('div'); div.innerHTML='<video id=v4 src=tone.wav autoplay muted></video>'; document.body.appendChild(div);
+const v5 = document.createElement('video'); v5.muted=true; v5.toggleAttribute('autoplay'); v5.src='tone.wav'; document.body.appendChild(v5);
+window.check=()=>({v:st(v), v2:st(v2), v3:st(v3), v4:st(document.getElementById('v4')), v5:st(v5)})
+</script></body>

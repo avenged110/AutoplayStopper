@@ -1,0 +1,4 @@
+<!doctype html><script src=common.js></script><body style="margin:0"><video id=v src=tone.wav width="480" height="270" style="display:block;background:#000"></video><script>
+v.play().catch(()=>{ v.muted = true; v.play().catch(()=>{ R.fallbackRejected = true; }); });
+v.addEventListener('click', ()=>{ v.paused ? v.play() : v.pause(); });
+window.check=()=>({v:st(v), fallbackRejected:R.fallbackRejected})</script></body>

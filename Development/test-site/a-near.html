@@ -1,0 +1,14 @@
+<!doctype html><script src=common.js></script><body style="margin:0">
+<div class=player style="position:absolute;left:0;top:0;width:480px;height:320px">
+  <video id=v1 src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><button id=b1 style="height:40px;width:100px">Play</button></div>
+<div class=player style="position:absolute;left:600px;top:0;width:480px;height:320px">
+  <video id=v2 src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><button class=dplay data-v=v2 style="height:40px;width:100px">Play</button></div>
+<div class=player style="position:absolute;left:0;top:400px;width:480px;height:320px">
+  <video id=v3 src=tone.wav muted width="480" height="270" style="display:block;background:#000"></video><button id=b3 style="height:40px;width:100px">Play</button></div>
+<div id=list style="position:absolute;left:600px;top:500px;width:300px;height:200px"><button class=dplay data-v=v4 style="height:40px;width:200px">Track 4</button></div>
+<audio id=v4 src=tone.wav></audio>
+<script>
+b1.addEventListener('click', ()=>tryPlay(v1,'button'));
+document.addEventListener('click', e=>{ const b=e.target.closest('.dplay'); if (b) tryPlay(document.getElementById(b.dataset.v), 'deleg_'+b.dataset.v); });
+b3.addEventListener('click', async ()=>{ await new Promise(r=>setTimeout(r,60)); tryPlay(v3,'asyncNear'); });
+window.check=()=>({v1:st(v1), v2:st(v2), v3:st(v3), v4:st(v4), button:R.button, deleg_v2:R['deleg_v2'], asyncNear:R.asyncNear, deleg_v4:R['deleg_v4']})</script></body>

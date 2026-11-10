@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Import Whitelist — Autoplay Stopper</title>
+    <link rel="stylesheet" href="import.css" />
+  </head>
+  <body>
+    <main>
+      <header class="brand">
+        <img src="../icons/icon128.png" alt="" width="28" height="28" />
+        <h1>Import Whitelist</h1>
+      </header>
+      <p class="lede" id="lede">Choose an Autoplay Stopper whitelist file (.txt).</p>
+      <p class="msg" id="msg" aria-live="polite"></p>
+      <div class="buttons">
+        <button type="button" class="btn" id="cancel">Cancel</button>
+        <button type="button" class="btn primary" id="choose">Choose File…</button>
+      </div>
+      <input id="file" type="file" accept=".txt,text/plain" hidden />
+    </main>
+    <script src="../shared/sites.js"></script>
+    <script src="../shared/format.js"></script>
+    <script src="import.js"></script>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+<!doctype html><body style="margin:0"><video id=v src=tone.wav muted style="width:100vw;height:100vh"></video>
+<script>let res='none'; setTimeout(()=>{ v.play().then(()=>res='resolved', e=>res=e.name) }, 1000);
+window.addEventListener('message', e=>{ if(e.data==='play'){ v.play().then(()=>res='resolved', er=>res=er.name) } if(e.data==='state') e.source.postMessage({childState:{paused:v.paused,t:v.currentTime,res}}, '*'); });</script></body>
